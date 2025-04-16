@@ -1,0 +1,186 @@
+#teamIntro {
+    background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%);
+}
+
+.river-flow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,50 Q25,40 50,50 T100,50" fill="none" stroke="rgba(64, 180, 196, 0.5)" stroke-width="4"/></svg>');
+    background-size: 200px 100px;
+    animation: flow 20s linear infinite;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+@keyframes flow {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 200px 0;
+    }
+}
+
+.custom-popup .leaflet-popup-content-wrapper {
+    background: #134e4a;
+    color: white;
+    border-radius: 8px;
+}
+
+.custom-popup .leaflet-popup-tip {
+    background: #134e4a;
+}
+
+.map-container {
+    transition: all 0.5s ease;
+}
+
+.map-container.zoomed {
+    transform: scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.eco-pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+}
+
+/* PET Degradation Animation */
+.pet-molecule {
+    position: relative;
+    width: 300px;
+    height: 100px;
+    margin: 20px auto;
+}
+
+.pet-chain {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.pet-unit {
+    display: flex;
+    align-items: center;
+}
+
+.carbon {
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    position: relative;
+}
+
+.oxygen {
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+}
+
+.bond {
+    width: 40px;
+    height: 4px;
+    background-color: #666;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+.bond.broken {
+    background-color: transparent;
+}
+
+.bond.broken::before,
+.bond.broken::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background-color: #f00;
+    top: 1px;
+}
+
+.bond.broken::before {
+    transform: rotate(10deg);
+    left: 0;
+}
+
+.bond.broken::after {
+    transform: rotate(-10deg);
+    right: 0;
+}
+
+.tio2-particle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #4ade80;
+    border-radius: 50%;
+    z-index: 1000;
+    opacity: 0;
+    transition: all 1s ease;
+    top: 10px;
+    left: 120px;
+}
+
+.uv-light {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 30px;
+    background: linear-gradient(to bottom, transparent, #d4be00bf);
+    animation: shine 2s infinite;
+}
+
+@keyframes shine {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+.degradation-animation {
+    display: none;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

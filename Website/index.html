@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Chemists - River Ecosystem Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="leaflet.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="leaflet.js"></script>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <!-- Team Introduction Section -->
+    <section id="teamIntro"
+        class="min-h-screen flex flex-col items-center justify-center text-white p-6 transition-all duration-1000">
+        <div class="text-center max-w-4xl mx-auto">
+            <div class="mb-8">
+                <div
+                    class="w-24 h-24 bg-teal-400 rounded-full mx-auto flex items-center justify-center shadow-lg mb-6 eco-pulse">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-teal-900" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                    </svg>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight">ECO CHEMISTS</h1>
+                <p class="text-xl md:text-2xl font-light opacity-90">Bridging Chemistry and Ecology for Sustainable
+                    Urban Waterways</p>
+            </div>
+
+            <div class="mt-12">
+                <button id="exploreBtn"
+                    class="px-8 py-3 bg-teal-600 hover:bg-teal-700 rounded-full font-medium text-lg shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center mx-auto">
+                    Explore the Ecosystem
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Visualization Section -->
+    <section id="mapSection" class="min-h-screen hidden p-4 md:p-8 bg-gray-100">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-teal-900 mb-6">Xindian River Ecosystem</h2>
+            <p class="text-gray-700 mb-8 max-w-3xl">
+                This satellite image captures a densely developed urban area bisected by a wide river system, likely
+                part of the Xindian River in Taipei, Taiwan.
+                At the center lies a large green island surrounded by multiple river channels, featuring wetlands, tree
+                cover, and park infrastructure,
+                indicating its use as an ecological and recreational zone—most likely Huajiang Park.
+            </p>
+
+            <div class="bg-white rounded-xl shadow-xl overflow-hidden map-container">
+                <div id="map" class="w-full h-[70vh] relative">
+                    <div class="river-flow"></div>
+                </div>
+                <div class="p-4 bg-teal-50 border-t border-teal-100">
+                    <div class="flex flex-wrap items-center justify-between">
+                        <div>
+                            <h3 class="font-semibold text-teal-900">Huajiang Bridge Area</h3>
+                            <p class="text-sm text-gray-600">Click on the marker to learn about this critical
+                                infrastructure</p>
+                        </div>
+                        <div class="flex space-x-2 mt-2 md:mt-0">
+                            <button id="zoomInBtn"
+                                class="px-3 py-1 bg-teal-600 text-white rounded-md hover:bg-teal-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <button id="zoomOutBtn"
+                                class="px-3 py-1 bg-teal-600 text-white rounded-md hover:bg-teal-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PET Degradation Animation -->
+            <div id="degradationAnimation" class="degradation-animation">
+                <h3 class="text-xl font-bold text-teal-900 mb-4">UV-assisted TiO₂ Photocatalytic Degradation of PET</h3>
+                <div class="pet-molecule">
+                    <div class="uv-light"></div>
+                    <div class="tio2-particle" id="tio2-1"></div>
+                    <div class="tio2-particle" id="tio2-2"></div>
+                    <div class="radical-particle" id="radical-1"></div>
+                    <div class="radical-particle" id="radical-2"></div>
+                    <div class="pet-chain">
+                        <div class="pet-unit">
+                            <div class="carbon">C</div>
+                            <div class="bond double"></div>
+                            <div class="oxygen">O</div>
+                            <div class="bond single"></div>
+                            <div class="carbon">C</div>
+                            <div class="bond single"></div>
+                            <div class="oxygen">O</div>
+                            <div class="bond double"></div>
+                            <div class="hydrogen">H</div>
+                        </div>
+                        <div class="pet-unit">
+                            <div class="carbon">C</div>
+                            <div class="bond double"></div>
+                            <div class="oxygen">O</div>
+                            <div class="bond single"></div>
+                            <div class="carbon">C</div>
+                            <div class="bond single"></div>
+                            <div class="oxygen">O</div>
+                            <div class="bond double"></div>
+                            <div class="hydrogen">H</div>
+                        </div>
+                        <div class="pet-unit">
+                            <div class="carbon">C</div>
+                            <div class="bond double"></div>
+                            <div class="oxygen">O</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-700 text-sm mt-4">
+                    This enhanced animation demonstrates the photodegradation of PET polymer chains by TiO₂ nanoparticles under UV light. Ester bonds between carbon and oxygen are targeted by reactive oxygen species, leading to fragmentation into smaller units and eventual mineralization.
+                </p>
+                <button id="restartAnimation"
+                    class="mt-4 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700">
+                    Restart Animation
+                </button>
+            </div>
+
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-teal-100 p-2 rounded-full mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-800">Urban Density</h3>
+                    </div>
+                    <p class="text-gray-600">The eastern side shows dense residential and commercial buildings, while
+                        the western side appears more industrial with spacious areas.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-teal-100 p-2 rounded-full mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-800">River Network</h3>
+                    </div>
+                    <p class="text-gray-600">Multiple river channels surround Huajiang Park, creating a complex aquatic
+                        ecosystem within the urban environment.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-teal-100 p-2 rounded-full mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-800">Infrastructure</h3>
+                    </div>
+                    <p class="text-gray-600">Major expressways and bridges span across the water, linking districts
+                        while engineered embankments manage flood risks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="script.js"></script>
+</body>
+
+</html>
