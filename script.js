@@ -236,7 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
       for (let i = 1; i <= 2; i++) {
         const tio2 = document.getElementById(`tio2-${i}`);
         tio2.style.transition = "all 1.5s ease-in-out";
-        tio2.style.left = "100px";
+        tio2.style.left = "90px";
         tio2.style.top = "0px";
       }
     }, 500);
